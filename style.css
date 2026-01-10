@@ -375,3 +375,115 @@ th { background: var(--primary); color: white; }
     background-image: url('luyz.jpg');
     background-position: top center; /* Garante que o rosto (topo da foto) apareça */
 }
+
+
+/* --- CARROSSEL (SLIDER) --- */
+
+.carousel-container {
+    position: relative;
+    height: 90vh; /* Altura do banner */
+    width: 100%;
+    margin-top: 60px; /* Compensa o header fixo */
+    overflow: hidden;
+    background-color: #000; /* Fundo preto pra evitar flash branco */
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 1s ease-in-out; /* Efeito de transição suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    padding: 0 1rem;
+}
+
+.slide.active {
+    opacity: 1; /* Slide ativo fica visível */
+    z-index: 1;
+}
+
+/* Conteúdo do Texto dentro do Slide */
+.hero-content {
+    z-index: 2; /* Fica acima da imagem */
+    max-width: 800px;
+    animation: subirTexto 1s ease forwards;
+}
+
+@keyframes subirTexto {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Botões (Setas) */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    border-radius: 50%;
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.carousel-btn:hover { background-color: var(--primary); }
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* Indicadores (Bolinhas) */
+.indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dot.active, .dot:hover {
+    background-color: var(--secondary);
+    transform: scale(1.2);
+}
+
+/* Ajuste Mobile */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2rem; }
+    .carousel-btn { padding: 0.5rem; font-size: 1.5rem; width: 40px; height: 40px; }
+}
