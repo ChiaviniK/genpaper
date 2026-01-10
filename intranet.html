@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenSys | Intranet Corporativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="intranet.js" defer></script>
+</head>
+<body>
+
+    <div class="sidebar" id="mySidebar">
+        <div class="toggle-btn" onclick="toggleMenu()">☰</div>
+        <div class="user-info" id="userInfoBox">
+            <h3>GenSys 2.0</h3>
+            <p id="lblUser">User</p>
+            <small id="lblRole">Role</small>
+        </div>
+        
+        <div class="menu-btn active" id="menu-dash" onclick="navegar('dash')">
+            <span class="icon">📊</span> <span class="txt">Dashboard</span>
+        </div>
+        <div class="menu-btn" id="menu-msg" onclick="navegar('msg')">
+            <span class="icon">📩</span> <span class="txt">Mensagens</span>
+        </div>
+        <div class="menu-btn" id="menu-data" onclick="navegar('data')">
+            <span class="icon">🗄️</span> <span class="txt">Banco de Dados</span>
+        </div>
+        <div class="menu-btn logout" onclick="sair()">
+            <span class="icon">🚪</span> <span class="txt">Sair</span>
+        </div>
+    </div>
+
+    <div class="main" id="mainContent">
+        
+        <div id="view-msg" class="hidden">
+            <h1>Mensagens Internas</h1>
+            <div class="card-panel" style="border-left: 5px solid #2ecc71;">
+                <h3>🎉 Meta Batida!</h3>
+                <p>Parabéns equipe de vendas pelo contrato com a Editora Globo.</p>
+            </div>
+        </div>
+
+        <div id="view-data" class="hidden">
+            <h1>Data Lake (Repositório)</h1>
+            <div class="alert-box" style="background: #e3f2fd; border-color: #2196f3; color: #0d47a1;">
+                ℹ️ <strong>Arquivos disponíveis para seu perfil:</strong> Baixe os JSONs para análise.
+            </div>
+            
+            <div id="download-area" style="display: flex; gap: 1rem; flex-wrap: wrap;"></div>
+        </div>
+
+        <div id="view-dash">
+            
+            <div id="perfil-rh" class="hidden">
+                <h1>RH Analytics & Access Control</h1>
+                <div class="alert-box">⚠️ Atenção: Não compartilhe esta tela.</div>
+                
+                <div class="card-panel">
+                    <h3>Credenciais de Setor (Master Keys)</h3>
+                    <table>
+                        <thead><tr><th>Departamento</th><th>Usuário</th><th>Senha</th></tr></thead>
+                        <tbody>
+                            <tr><td>Produção</td><td>prod.lead</td><td>papel2026</td></tr>
+                            <tr><td>Financeiro</td><td>fin.cfo</td><td>money</td></tr>
+                            <tr><td>Marketing</td><td>mkt.head</td><td>viral</td></tr>
+                            <tr><td>Logística</td><td>log.ger</td><td>rota66</td></tr>
+                            <tr><td>Insumos (Compras)</td><td>ins.buy</td><td>quimica</td></tr>
+                            <tr><td>Contabilidade</td><td>cont.fisc</td><td>leao</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="perfil-producao" class="hidden">
+                <h1>Painel Industrial</h1>
+                <div class="prod-nav">
+                    <button class="prod-btn active" onclick="mudarAbaProd('maq', this)">Maquinário</button>
+                    </div>
+                <div id="aba-maq">
+                    <div class="grid-maquinas" id="container-maquinas"></div>
+                </div>
+                <div id="aba-ins" class="hidden"></div>
+                <div id="aba-turn" class="hidden"></div>
+            </div>
+            
+            <div id="perfil-erro" class="hidden">
+                <h1>Bem-vindo ao GenSys</h1>
+                <p>Seu perfil não possui visualização de Dashboard em tempo real.</p>
+                <div class="card-panel" style="margin-top: 2rem; border-left: 5px solid #1b5e20;">
+                    <h3>📂 Acesso aos Dados</h3>
+                    <p>Por favor, navegue até a guia <strong>"Banco de Dados"</strong> no menu lateral para acessar os relatórios e arquivos JSON pertinentes ao seu departamento.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

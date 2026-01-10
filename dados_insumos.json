@@ -1,0 +1,30 @@
+[
+    {
+        "insumo": "Eucalipto (Toras)",
+        "tipo": "Madeira",
+        "nivel": "12.500 m³",
+        "status": "Normal",
+        "cor_status": "green"
+    },
+    {
+        "insumo": "Soda Cáustica (NaOH)",
+        "tipo": "Químico (Licor Branco)",
+        "nivel": "22% Tanque A",
+        "status": "Baixo (Reposição Necessária)",
+        "cor_status": "red"
+    },
+    {
+        "insumo": "Dióxido de Cloro",
+        "tipo": "Branqueamento",
+        "nivel": "82% Tanque Central",
+        "status": "Normal",
+        "cor_status": "green"
+    },
+    {
+        "insumo": "Água Industrial",
+        "tipo": "Recurso Hídrico",
+        "nivel": "450 m³/h (Vazão)",
+        "status": "Estável",
+        "cor_status": "green"
+    }
+]

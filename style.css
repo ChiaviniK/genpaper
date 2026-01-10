@@ -1,0 +1,377 @@
+/* =========================================
+   1. VARIÁVEIS E RESET GLOBAL
+   ========================================= */
+:root {
+    /* Paleta de Cores GenPaper */
+    --primary: #1b5e20;   /* Verde Floresta */
+    --secondary: #2ecc71; /* Verde Vibrante */
+    --accent: #81c784;    /* Verde Claro */
+    --warning: #f1c40f;   /* Amarelo Alerta */
+    --danger: #e74c3c;    /* Vermelho Erro */
+    --dark: #2c3e50;      /* Azul Noturno (Texto/Sidebar) */
+    --light: #f4f7f6;     /* Fundo Claro */
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--text-color);
+    line-height: 1.6;
+    /* Nota: Não usamos display:flex no body para não quebrar o scroll da Landing Page */
+}
+
+/* =========================================
+   2. ESTILOS DA LANDING PAGE (INDEX.HTML)
+   ========================================= */
+
+/* Header & Navegação */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 5px;
+}
+.logo span { color: var(--secondary); }
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--secondary); }
+
+/* Botão Intranet (Header) */
+.btn-login {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    height: 90vh;
+    /* Imagem de fundo de floresta/papel */
+    background: linear-gradient(rgba(27, 94, 32, 0.8), rgba(27, 94, 32, 0.6)), url('https://images.unsplash.com/photo-1598335624163-228795ac0a2e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    margin-top: 60px; /* Compensa o header fixo */
+}
+
+.hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+.hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; }
+
+.btn-hero {
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.btn-hero:hover { background-color: var(--accent); }
+
+/* Seções Gerais */
+section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    color: var(--primary);
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* Cards dos Fundadores */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 15px;
+    width: 350px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    border-top: 5px solid var(--secondary);
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.card:hover { transform: translateY(-10px); }
+
+/* Imagens dos Fundadores */
+.card-img-placeholder {
+    height: 250px;
+    width: 100%;
+    background-color: #ddd;
+    background-size: cover;
+    background-position: top center;
+    margin-bottom: 1.5rem;
+}
+
+.card-img-samuel {
+    background-image: url('samuel.jpg'); 
+}
+.card-img-luyz {
+    background-image: url('luyz.jpg');
+}
+
+.role {
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Área de Sustentabilidade */
+.sust-bg { background-color: var(--white); width: 100%; }
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.stat-box {
+    text-align: center; padding: 2rem;
+    background: var(--light); border-radius: 10px; border: 1px solid #ddd;
+}
+.stat-number { font-size: 3rem; font-weight: 700; color: var(--primary); display: block; }
+
+/* Área de Investidores */
+.financial-block {
+    background-color: var(--dark);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.ticker { font-family: 'Courier New', monospace; font-size: 2rem; color: var(--accent); }
+.stock-price { font-size: 1.5rem; font-weight: bold; }
+.positive { color: #4caf50; }
+
+footer {
+    background-color: var(--primary);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* =========================================
+   3. ESTILOS DA INTRANET (DASHBOARD)
+   ========================================= */
+
+/* Sidebar Retrátil */
+.sidebar {
+    width: 260px;
+    background-color: var(--dark);
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 2000; /* Maior que o header da home */
+    transition: width 0.4s ease;
+    overflow: hidden;
+}
+
+.sidebar.closed { width: 80px; }
+.sidebar.closed .txt, .sidebar.closed .user-info { display: none; }
+.sidebar.closed .menu-btn { justify-content: center; }
+
+.toggle-btn {
+    font-size: 1.5rem; cursor: pointer; color: white;
+    margin-bottom: 1rem; align-self: flex-end; padding: 5px;
+}
+.sidebar.closed .toggle-btn { align-self: center; }
+
+.user-info { border-bottom: 1px solid #ffffff30; padding-bottom: 1rem; margin-bottom: 2rem; white-space: nowrap; }
+.user-info h3 { color: var(--secondary); margin-bottom: 5px; }
+
+.menu-btn {
+    display: flex; align-items: center; gap: 15px;
+    padding: 1rem; color: #bdc3c7; cursor: pointer;
+    border-radius: 5px; margin-bottom: 0.5rem; transition: 0.3s;
+    white-space: nowrap;
+}
+.menu-btn .icon { font-size: 1.3rem; }
+.menu-btn:hover, .menu-btn.active { background-color: var(--primary); color: white; }
+.logout { margin-top: auto; background-color: var(--danger); text-align: center; color: white; }
+
+/* Main Content da Intranet */
+.main {
+    margin-left: 260px;
+    padding: 3rem;
+    width: calc(100% - 260px);
+    transition: margin-left 0.4s ease, width 0.4s ease;
+    min-height: 100vh; /* Garante altura total */
+}
+.main.closed { margin-left: 80px; width: calc(100% - 80px); }
+
+/* Componentes do Dashboard */
+.hidden { display: none !important; }
+
+.card-panel {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.alert-box {
+    background: #ffeaa7;
+    border-left: 5px solid var(--warning);
+    padding: 1rem;
+    color: #d35400;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.row-highlight { background-color: #fff3cd; }
+
+/* Navegação da Produção */
+.prod-nav { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid #ddd; padding-bottom: 1rem; }
+.prod-btn {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--primary);
+    background: white; color: var(--primary);
+    font-weight: bold; border-radius: 50px;
+    cursor: pointer; transition: 0.3s;
+}
+.prod-btn:hover, .prod-btn.active { background: var(--primary); color: white; }
+
+/* Grids e Cards de Máquinas (Diferentes dos cards da Home) */
+.grid-maquinas { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+
+.card-maq {
+    background: white; padding: 1.5rem; border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-left: 5px solid #ccc;
+    cursor: pointer; transition: transform 0.2s; position: relative;
+}
+.card-maq:hover { transform: translateY(-5px); border-left-width: 10px; }
+
+.status-ok { border-color: var(--secondary); }
+.status-warn { border-color: var(--warning); }
+
+.badge {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    padding: 0.2rem 0.8rem; border-radius: 4px;
+    color: white; font-size: 0.8rem; font-weight: bold;
+}
+.bg-ok { background: var(--secondary); }
+.bg-warn { background: var(--warning); color: #333; }
+
+/* Painéis e Tabelas */
+.painel-detalhes {
+    background: #eef2f3; border: 1px solid #ddd; border-radius: 10px;
+    padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s;
+}
+
+.tele-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.tele-item { background: white; padding: 1rem; text-align: center; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.tele-val { font-size: 1.5rem; font-weight: bold; display: block; color: var(--dark); }
+
+table { width: 100%; border-collapse: collapse; background: white; }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #eee; }
+th { background: var(--primary); color: white; }
+
+/* Responsividade Mobile Básica */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .sidebar { width: 0; padding: 0; } /* Esconde sidebar no mobile por padrão */
+    .main { margin-left: 0; width: 100%; }
+}
+
+.hidden { display: none !important; }
+
+/* --- Atualização das Fotos dos Fundadores (Professores) --- */
+
+/* Classe base para o espaço da foto */
+.card-img-placeholder {
+    height: 300px; /* Aumentei um pouco a altura para caber melhor a foto */
+    width: 100%;
+    background-color: #ddd; /* Cor de fundo caso a foto demore a carregar */
+    background-size: cover; /* Faz a foto cobrir todo o espaço sem esticar */
+    background-repeat: no-repeat;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Foto do Samuel */
+.card-img-samuel {
+    background-image: url('samuel.jpg'); 
+    background-position: top center; /* Garante que o rosto (topo da foto) apareça */
+}
+
+/* Foto do Luyz */
+.card-img-luyz {
+    background-image: url('luyz.jpg');
+    background-position: top center; /* Garante que o rosto (topo da foto) apareça */
+}

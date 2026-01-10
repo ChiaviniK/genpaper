@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenSys | Login Corporativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <style>
+        body {
+            background-color: #1b5e20; /* Fundo verde escuro corporativo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            display: block;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .btn-full {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .btn-full:hover { background-color: var(--secondary-color); }
+        .error-msg {
+            color: red;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none; /* Escondido por padrão */
+        }
+        .back-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <span class="login-logo">🔒 GenSys 2.0</span>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" placeholder="ex: rh.admin" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="••••••" required>
+            </div>
+            
+            <button type="submit" class="btn-full">Acessar Sistema</button>
+            <p id="errorMsg" class="error-msg">Usuário ou senha incorretos.</p>
+        </form>
+
+        <a href="index.html" class="back-link">← Voltar ao site institucional</a>
+    </div>
+
+    <script>
+        // --- BASE DE DADOS SIMULADA (Segredo do Professor) ---
+        // --- NO FINAL DO LOGIN.HTML ---
+        const users = {
+            'rh.admin': { pass: 'rh123', role: 'RH', name: 'Carla Mendez' },
+            'prod.lead': { pass: 'papel2026', role: 'Produção', name: 'Eng. Roberto' },
+            'fin.cfo': { pass: 'money', role: 'Financeiro', name: 'Sr. Tanaka' },
+            'mkt.head': { pass: 'viral', role: 'Marketing', name: 'Julia S.' },
+            'log.ger': { pass: 'rota66', role: 'Logística', name: 'Cleber F.' },
+            'ins.buy': { pass: 'quimica', role: 'Insumos', name: 'Dra. Ana' },
+            'cont.fisc': { pass: 'leao', role: 'Contabilidade', name: 'Pedro H.' }
+        };
+        // const users = {
+        //     'rh.admin': { pass: 'rh123', role: 'RH', name: 'Carla Mendez' },
+        //     'prod.lead': { pass: 'papel2026', role: 'Produção', name: 'Eng. Roberto' },
+        //     'fin.cfo': { pass: 'money', role: 'Financeiro', name: 'Sr. Tanaka' },
+        //     'mkt.head': { pass: 'viral', role: 'Marketing', name: 'Julia S.' },
+        //     'log.ger': { pass: 'rota66', role: 'Logística', name: 'Cleber F.' },
+        //     'ins.buy': { pass: 'quimica', role: 'Insumos', name: 'Dra. Ana' },
+        //     'cont.fisc': { pass: 'leao', role: 'Contabilidade', name: 'Pedro H.' }
+        // };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value.toLowerCase();
+            const pass = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (users[user] && users[user].pass === pass) {
+                // Login Sucesso: Salva sessão e redireciona
+                localStorage.setItem('genUser', JSON.stringify(users[user]));
+                window.location.href = 'intranet.html';
+            } else {
+                // Login Falha
+                errorMsg.style.display = 'block';
+                // Tremidinha no formulário (opcional)
+                document.querySelector('.login-container').animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-10px)' },
+                    { transform: 'translateX(10px)' },
+                    { transform: 'translateX(0)' }
+                ], { duration: 300 });
+            }
+        });
+    </script>
+</body>
+</html>

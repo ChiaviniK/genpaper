@@ -1,0 +1,26 @@
+[
+    {
+        "data": "10/01/2026",
+        "turno": "Manhã (06:00 - 14:00)",
+        "maquina_id": 2,
+        "operador": "Carlos Lima (Matrícula 4590)",
+        "funcao": "Operador Sênior de Digestor",
+        "obs": "Operação normal."
+    },
+    {
+        "data": "10/01/2026",
+        "turno": "Tarde (14:00 - 22:00)",
+        "maquina_id": 2,
+        "operador": "Mariana Souza (Matrícula 9921)",
+        "funcao": "Trainee em Supervisão",
+        "obs": "Assumiu o painel sozinha às 15:00. Relatou dificuldade com controle de pressão."
+    },
+    {
+        "data": "10/01/2026",
+        "turno": "Tarde (14:00 - 22:00)",
+        "maquina_id": 3,
+        "operador": "João Mendes",
+        "funcao": "Técnico de Secagem",
+        "obs": "-"
+    }
+]

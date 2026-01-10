@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "nome": "MP-01: Picador de Madeira",
+        "setor": "Pátio de Madeira",
+        "status": "ok",
+        "localizacao": {
+            "lat": -22.951916,
+            "lng": -43.210487,
+            "referencia": "Unidade Rio - Corcovado"
+        },
+        "telemetria": [
+            { "label": "RPM do Motor", "value": "1200 rpm" },
+            { "label": "Vibração Eixo", "value": "2.4 mm/s" },
+            { "label": "Carga", "value": "85%" }
+        ],
+        "alerta": null
+    },
+    {
+        "id": 2,
+        "nome": "MP-02: Digestor Contínuo",
+        "setor": "Polpação Química",
+        "status": "warning",
+        "localizacao": {
+            "lat": -26.9923,
+            "lng": -48.6348,
+            "referencia": "Unidade Sul - Cristo Luz"
+        },
+        "telemetria": [
+            { "label": "Pressão Interna", "value": "8.8 bar" },
+            { "label": "Temp. Cozimento", "value": "175°C" },
+            { "label": "Vazão Licor Branco", "value": "1100 L/min" },
+            { "label": "Nível Kappa", "value": "19.2" }
+        ],
+        "alerta": "CRÍTICO: Pressão 10% acima do limite máximo operacional. Risco de degradação da fibra."
+    },
+    {
+        "id": 3,
+        "nome": "MP-03: Secagem & Bobina",
+        "setor": "Acabamento",
+        "status": "ok",
+        "localizacao": {
+            "lat": -14.8666,
+            "lng": -40.8333,
+            "referencia": "Unidade Nordeste - Serra do Periperi"
+        },
+        "telemetria": [
+            { "label": "Velocidade", "value": "1100 m/min" },
+            { "label": "Umidade Final", "value": "6.5%" },
+            { "label": "Gramatura", "value": "75 g/m²" }
+        ],
+        "alerta": null
+    }
+]
