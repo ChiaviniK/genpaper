@@ -54,9 +54,14 @@
         <div id="view-dash">
             
             <div id="perfil-rh" class="hidden">
-                <h1>RH Analytics & Access Control</h1>
-                <div class="alert-box">⚠️ Atenção: Não compartilhe esta tela.</div>
+                <h1>RH Analytics</h1>
+                <div class="alert-box">⚠️ Segurança: Senhas administrativas expostas.</div>
                 
+                <div style="display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <div class="card-panel" style="flex:1"><canvas id="grafico1"></canvas></div>
+                    <div class="card-panel" style="flex:1"><canvas id="grafico2"></canvas></div>
+                </div>
+
                 <div class="card-panel">
                     <h3>Credenciais de Setor (Master Keys)</h3>
                     <table>
@@ -66,32 +71,93 @@
                             <tr><td>Financeiro</td><td>fin.cfo</td><td>money</td></tr>
                             <tr><td>Marketing</td><td>mkt.head</td><td>viral</td></tr>
                             <tr><td>Logística</td><td>log.ger</td><td>rota66</td></tr>
-                            <tr><td>Insumos (Compras)</td><td>ins.buy</td><td>quimica</td></tr>
+                            <tr><td>Insumos</td><td>ins.buy</td><td>quimica</td></tr>
                             <tr><td>Contabilidade</td><td>cont.fisc</td><td>leao</td></tr>
+                            <tr style="background-color: #e3f2fd; font-weight: bold;"><td>Auditoria (Dados)</td><td>audit.ext</td><td>data2026</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
             <div id="perfil-producao" class="hidden">
-                <h1>Painel Industrial</h1>
+                <h1>Controle Industrial</h1>
                 <div class="prod-nav">
-                    <button class="prod-btn active" onclick="mudarAbaProd('maq', this)">Maquinário</button>
-                    </div>
-                <div id="aba-maq">
-                    <div class="grid-maquinas" id="container-maquinas"></div>
+                    <button class="prod-btn active" onclick="mudarAba('prod', 'maq', this)">Maquinário</button>
+                    <button class="prod-btn" onclick="mudarAba('prod', 'ins', this)">Insumos</button>
+                    <button class="prod-btn" onclick="mudarAba('prod', 'turn', this)">Turnos</button>
                 </div>
-                <div id="aba-ins" class="hidden"></div>
-                <div id="aba-turn" class="hidden"></div>
+
+                <div id="prod-maq">
+                    <div class="grid-maquinas" id="grid-producao"></div> <div id="detalhe-producao" class="painel-detalhes">
+                        <h2 id="prod-titulo">...</h2>
+                        <div class="tele-grid" id="prod-dados"></div>
+                        <div id="prod-alerta" class="alert-box" style="display:none; margin-top:1rem;"></div>
+                    </div>
+                </div>
+                
+                <div id="prod-ins" class="hidden"><table style="margin-top:1rem"><tbody id="tab-prod-ins"></tbody></table></div>
+                <div id="prod-turn" class="hidden"><div id="tab-prod-turn"></div></div>
+            </div>
+
+            <div id="perfil-financeiro" class="hidden">
+                <h1>Gestão Financeira</h1>
+                <p style="margin-bottom: 1rem;">Clique nas transações para ver detalhes.</p>
+                
+                <div class="grid-maquinas" id="grid-financeiro"></div> <div id="detalhe-financeiro" class="painel-detalhes" style="border-top: 5px solid #8e44ad;">
+                    <h2 id="fin-titulo">...</h2>
+                    <p id="fin-desc" style="font-size: 1.2rem; color: #555;">...</p>
+                    <div class="tele-grid" id="fin-dados"></div>
+                </div>
+            </div>
+
+            <div id="perfil-logistica" class="hidden">
+                <h1>Frota e Rastreamento</h1>
+                <p style="margin-bottom: 1rem;">Monitoramento de Caminhões em Tempo Real.</p>
+
+                <div class="grid-maquinas" id="grid-logistica"></div>
+
+                <div id="detalhe-logistica" class="painel-detalhes" style="border-top: 5px solid #d35400;">
+                    <h2 id="log-titulo">...</h2>
+                    <div class="tele-grid" id="log-dados"></div>
+                </div>
+            </div>
+
+            <div id="perfil-marketing" class="hidden">
+                <h1>Campanhas e Mídia</h1>
+                <div class="grid-maquinas" id="grid-marketing"></div>
+
+                <div id="detalhe-marketing" class="painel-detalhes" style="border-top: 5px solid #e91e63;">
+                    <h2 id="mkt-titulo">...</h2>
+                    <div class="tele-grid" id="mkt-dados"></div>
+                </div>
+            </div>
+
+            <div id="perfil-contabilidade" class="hidden">
+                <h1>Livros Fiscais</h1>
+                <p>Notas Fiscais de Entrada (Clique para auditar)</p>
+                <div class="grid-maquinas" id="grid-contabilidade"></div>
+
+                <div id="detalhe-contabilidade" class="painel-detalhes" style="border-top: 5px solid #2c3e50;">
+                    <h2 id="cont-titulo">...</h2>
+                    <div class="tele-grid" id="cont-dados"></div>
+                    <div class="alert-box" style="margin-top: 1rem; background: #e3f2fd; border-color: #2196f3; color: #0d47a1;">
+                        ℹ️ <strong>Dica de Auditoria:</strong> Cruze o peso faturado aqui com o peso da balança na Logística.
+                    </div>
+                </div>
+            </div>
+
+            <div id="perfil-insumos" class="hidden">
+                <h1>Gestão de Fornecedores</h1>
+                <div class="grid-maquinas" id="grid-insumos"></div>
+                <div id="detalhe-insumos" class="painel-detalhes" style="border-top: 5px solid #27ae60;">
+                    <h2 id="ins-titulo">...</h2>
+                    <div class="tele-grid" id="ins-dados"></div>
+                </div>
             </div>
             
             <div id="perfil-erro" class="hidden">
-                <h1>Bem-vindo ao GenSys</h1>
-                <p>Seu perfil não possui visualização de Dashboard em tempo real.</p>
-                <div class="card-panel" style="margin-top: 2rem; border-left: 5px solid #1b5e20;">
-                    <h3>📂 Acesso aos Dados</h3>
-                    <p>Por favor, navegue até a guia <strong>"Banco de Dados"</strong> no menu lateral para acessar os relatórios e arquivos JSON pertinentes ao seu departamento.</p>
-                </div>
+                <h1>Acesso Restrito</h1>
+                <p>Perfil não autorizado para visualização de dashboard.</p>
             </div>
 
         </div>
