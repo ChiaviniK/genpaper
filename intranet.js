@@ -4,26 +4,113 @@
 const DB = {
     // --- PRODUÇÃO (CASO 1: Falha na MP-02 por falta de químico) ---
     maquinas: [
-        { id: 1, nome: "MP-01: Picador", setor: "Pátio", status: "ok", gps: "RJ", dados: [{k:"RPM", v:"1200"}, {k:"Vibração", v:"2.4mm/s"}], alerta: null },
-        { id: 2, nome: "MP-02: Digestor", setor: "Químico", status: "warn", gps: "SC", dados: [{k:"Pressão", v:"8.8 bar"}, {k:"Temp", v:"175°C"}], alerta: "Pressão Crítica" },
-        { id: 3, nome: "MP-03: Secagem", setor: "Acabamento", status: "ok", gps: "BA", dados: [{k:"Velocidade", v:"1100"}, {k:"Umidade", v:"6.5%"}], alerta: null }
-    ],
+  {
+    id: 1,
+    nome: "MP-01: Picador",
+    setor: "Pátio",
+    status: "ok",
+    gps: "RJ",
+    dados: [{ k: "RPM", v: "1200" }],
+    alerta: null,
+    historico: [
+      { data: "2025-07-01", producao: 450, temp: 65, status: "Normal" },
+      { data: "2025-09-10", producao: 460, temp: 68, status: "Normal" }
+    ]
+  },
+  {
+    id: 2,
+    nome: "MP-02: Digestor",
+    setor: "Químico",
+    status: "warn",
+    gps: "SC",
+    dados: [{ k: "Pressão", v: "8.8 bar" }],
+    alerta: "Pressão Crítica",
+    historico: [
+      { data: "2025-07-01", producao: 320, temp: 160, status: "Normal" },
+      { data: "2025-08-15", producao: 315, temp: 162, status: "Normal" },
+      { data: "2025-09-10", producao: 330, temp: 165, status: "Atenção" },
+      { data: "2025-11-20", producao: 340, temp: 170, status: "Atenção" },
+      { data: "2025-12-01", producao: 350, temp: 172, status: "Atenção" },
+      { data: "2025-12-15", producao: 355, temp: 174, status: "Crítico" },
+      { data: "2026-01-10", producao: 100, temp: 175, status: "FALHA" }
+    ]
+  },
+  {
+    id: 3,
+    nome: "MP-03: Secagem",
+    setor: "Acabamento",
+    status: "ok",
+    gps: "BA",
+    dados: [{ k: "Velocidade", v: "1100" }],
+    alerta: null,
+    historico: [
+      { data: "2025-10-05", producao: 300, temp: 90, status: "Normal" }
+    ]
+  }
+]
+,
     insumos: [
-        { nome: "Madeira", nivel: "12.500 m³", st: "Normal", cor: "green" },
-        { nome: "Soda Cáustica", nivel: "22% (Crítico)", st: "BAIXO", cor: "red" }, // Causa do Caso 1
-        { nome: "Resina Imp.", nivel: "10% (Crítico)", st: "BAIXO", cor: "red" }   // Pista do Caso 2
-    ],
+  {
+    nome: "Soda Cáustica",
+    nivel: "22%",
+    st: "CRÍTICO",
+    cor: "red",
+    historico: [
+      { data: "2025-07-01", pct: 95 },
+      { data: "2025-08-01", pct: 80 },
+      { data: "2025-09-01", pct: 65 },
+      { data: "2025-10-01", pct: 50 },
+      { data: "2025-11-01", pct: 35 },
+      { data: "2025-12-01", pct: 28 },
+      { data: "2026-01-10", pct: 22 }
+    ]
+  },
+  {
+    nome: "Resina Imp.",
+    nivel: "10%",
+    st: "CRÍTICO",
+    cor: "red",
+    historico: [
+      { data: "2025-07-01", pct: 90 },
+      { data: "2025-12-01", pct: 30 },
+      { data: "2026-01-10", pct: 10 }
+    ]
+  }
+]
+
+,
     turnos: [
-        { data: "10/01", turno: "Manhã", maq: 2, op: "Carlos L.", obs: "OK" },
-        { data: "10/01", turno: "Tarde", maq: 2, op: "Mariana S.", obs: "Falha Pressão" } // Culpada do Caso 1
-    ],
+  { data: "10/01", turno: "Manhã", maq: 3, op: "Carlos L.", obs: "OK" },
+  { data: "10/01", turno: "Tarde", maq: 2, op: "Mariana S.", obs: "Falha Pressão" },
+
+  { data: "12/02", turno: "Manhã", maq: 3, op: "João P.", obs: "OK" },
+  { data: "12/02", turno: "Noite", maq: 1, op: "Renata M.", obs: "Parada Não Planejada" },
+
+  { data: "15/03", turno: "Manhã", maq: 3, op: "Carlos L.", obs: "OK" },
+  { data: "15/03", turno: "Tarde", maq: 3, op: "Mariana S.", obs: "OK" },
+
+  { data: "18/04", turno: "Manhã", maq: 2, op: "João P.", obs: "Manutenção" },
+  { data: "18/04", turno: "Noite", maq: 2, op: "Renata M.", obs: "OK" },
+
+  { data: "20/05", turno: "Manhã", maq: 3, op: "Carlos L.", obs: "OK" },
+  { data: "20/05", turno: "Tarde", maq: 2, op: "Mariana S.", obs: "Vibração Excessiva" },
+
+  { data: "22/06", turno: "Manhã", maq: 3, op: "João P.", obs: "OK" },
+  { data: "22/06", turno: "Noite", maq: 3, op: "Renata M.", obs: "OK" }
+]
+,
 
     // --- FINANCEIRO (Dados gerais + Pagamento da fraude) ---
     pagamentos: [
-        { id: "PG-201", beneficiario: "Energy Corp", valor: "R$ 450.000", status: "Pago", dados: [{k:"Desc", v:"Conta Luz"}, {k:"Data", v:"05/01"}] },
-        { id: "PG-202", beneficiario: "Química Sul", valor: "R$ 40.000", status: "Pago", dados: [{k:"Desc", v:"Ref. NF-5003"}, {k:"Data", v:"11/01"}] }, // Pagamento da Fraude
-        { id: "PG-203", beneficiario: "Madeira Co.", valor: "R$ 5.000", status: "Agendado", dados: [{k:"Desc", v:"Compra Toras"}, {k:"Data", v:"15/01"}] }
-    ],
+  { id: "PG-201", beneficiario: "Energy Corp", valor: 450000, desc: "Conta Luz Janeiro" },
+  { id: "PG-202", beneficiario: "Energy Corp", valor: 470000, desc: "Conta Luz Fevereiro" },
+  { id: "PG-203", beneficiario: "Energy Corp", valor: 490000, desc: "Conta Luz Março" },
+
+  { id: "PG-210", beneficiario: "Química Sul", valor: 40000, desc: "NF-5003" },
+  { id: "PG-215", beneficiario: "Química Sul", valor: 38000, desc: "NF-5010" },
+  { id: "PG-220", beneficiario: "Química Sul", valor: 42000, desc: "NF-5022" }
+]
+,
     compras: [
         { id: "PO-99", item: "Empilhadeira", valor: "R$ 120.000", status: "Aprovado", dados: [{k:"Solicitante", v:"Logística"}] },
         { id: "PO-100", item: "Notebooks Dell", valor: "R$ 45.000", status: "Pendente", dados: [{k:"Solicitante", v:"TI"}] }
@@ -43,11 +130,21 @@ const DB = {
         { placa: "ABC-1234", modelo: "Volvo FH", status: "Em Rota", dados: [{k:"Motorista", v:"Jorge Amado"}, {k:"Carga", v:"Resina"}, {k:"Destino", v:"Fábrica Sul"}] },
         { placa: "XYZ-9876", modelo: "Scania R", status: "Manutenção", dados: [{k:"Motorista", v:"Pedro A."}, {k:"Oficina", v:"TruckCenter"}] }
     ],
-    balanca: [ 
+    
         // L-903 mostra que entraram 16.000 e saíram 10.000 = 6.000kg de carga real.
         // A NF-5003 (na contabilidade) diz que foram 8.000kg. FRAUDE DE 2.000kg.
-        { id: "L-903", placa: "ABC-1234", status: "Finalizado", dados: [{k:"Entrada", v:"16.000kg"}, {k:"Saída", v:"10.000kg"}, {k:"Líquido", v:"6.000kg"}, {k:"Ref NF", v:"NF-5003"}] }
-    ],
+        balanca: [
+  { id: "L-1050", placa: "ABC-1234", entrada: 25000, saida: 10000, carga_liq: 15000, nf_assoc: "NF-4020" },
+  { id: "L-1102", placa: "XYZ-9876", entrada: 15000, saida: 5000, carga_liq: 10000, nf_assoc: "NF-4100" },
+  { id: "L-1250", placa: "ABC-1234", entrada: 12050, saida: 7000, carga_liq: 5050, nf_assoc: "NF-4230" },
+  { id: "L-1340", placa: "LOG-5555", entrada: 24900, saida: 9950, carga_liq: 14950, nf_assoc: "NF-4350" },
+  { id: "L-1420", placa: "ABC-1234", entrada: 13000, saida: 7000, carga_liq: 6000, nf_assoc: "NF-4400" },
+  { id: "L-1500", placa: "XYZ-9876", entrada: 15000, saida: 5100, carga_liq: 9900, nf_assoc: "NF-4510" },
+  { id: "L-903", placa: "ABC-1234", entrada: 16000, saida: 10000, carga_liq: 6000, nf_assoc: "NF-5003" },
+  { id: "L-904", placa: "ABC-1234", entrada: 15500, saida: 10000, carga_liq: 5500, nf_assoc: "NF-5004" }
+]
+
+,
     motoristas: [
         { nome: "Jorge Amado", cnh: "Categoria E", status: "Ativo", dados: [{k:"Validade", v:"2028"}, {k:"ID", v:"55"}] },
         { nome: "Pedro Alvares", cnh: "Categoria E", status: "Ativo", dados: [{k:"Validade", v:"2027"}, {k:"ID", v:"12"}] }
@@ -68,16 +165,27 @@ const DB = {
 
     // --- CONTABILIDADE (CASO 2: A Nota Fiscal Fraudulenta) ---
     contabilidade: [
-        { nf: "NF-5001", forn: "Química Sul", total: "R$ 25.000", status: "Faturado", dados: [{k:"Item", v:"Resina"}, {k:"Qtd Faturada", v:"5.000 kg"}] },
-        { nf: "NF-5003", forn: "Química Sul", total: "R$ 40.000", status: "Faturado", dados: [{k:"Item", v:"Resina"}, {k:"Qtd Faturada", v:"8.000 kg"}] }, // FRAUDE (Balança diz 6k)
-        { nf: "NF-5004", forn: "Química Sul", total: "R$ 40.000", status: "Pendente", dados: [{k:"Item", v:"Resina"}, {k:"Qtd Faturada", v:"8.000 kg"}] }  // FRAUDE
-    ],
+  { nf: "NF-4020", forn: "Reflorestadora PR", item: "Madeira", qtd: 15000, total: 7500 },
+  { nf: "NF-4100", forn: "Química Sul", item: "Soda Cáustica", qtd: 10000, total: 50000 },
+  { nf: "NF-4230", forn: "Química Sul", item: "Resina", qtd: 5000, total: 25000 },
+  { nf: "NF-4350", forn: "Reflorestadora PR", item: "Madeira", qtd: 15000, total: 7600 },
+  { nf: "NF-4400", forn: "Química Sul", item: "Resina", qtd: 6000, total: 30000 },
+  { nf: "NF-4510", forn: "Química Sul", item: "Soda Cáustica", qtd: 9900, total: 49500 },
+  { nf: "NF-5003", forn: "Química Sul", item: "Resina", qtd: 8000, total: 40000 },
+  { nf: "NF-5004", forn: "Química Sul", item: "Resina", qtd: 8000, total: 40000 }
+]
+,
 
     // --- MARKETING (Distradores) ---
     mkt_campanhas: [
-        { nome: "Papel Verde", canal: "Instagram", status: "Ativa", dados: [{k:"Investimento", v:"R$ 5.000"}, {k:"Cliques", v:"15.420"}] },
-        { nome: "Institucional", canal: "LinkedIn", status: "Ativa", dados: [{k:"Investimento", v:"R$ 2.000"}, {k:"Views", v:"8.000"}] }
-    ],
+  { mes: "Jan", nome: "Papel Verde", canal: "Instagram", cliques: 15000, gasto: 5000 },
+  { mes: "Fev", nome: "Papel Verde", canal: "Instagram", cliques: 13800, gasto: 5000 },
+  { mes: "Mar", nome: "GenPaper Institucional", canal: "LinkedIn", cliques: 620, gasto: 2000 },
+  { mes: "Abr", nome: "Papel Reciclado", canal: "Google Ads", cliques: 8900, gasto: 6000 },
+  { mes: "Mai", nome: "Papel Verde", canal: "Instagram", cliques: 17000, gasto: 5500 },
+  { mes: "Jun", nome: "Institucional ESG", canal: "LinkedIn", cliques: 1200, gasto: 2500 }
+]
+,
     mkt_social: [
         { rede: "Twitter", mencao: "@GenPaper cheiro estranho", status: "Negativo", dados: [{k:"Data", v:"10/01"}, {k:"Retweets", v:"12"}] },
         { rede: "Instagram", mencao: "Amei a embalagem", status: "Positivo", dados: [{k:"Data", v:"11/01"}, {k:"Likes", v:"340"}] }
@@ -369,3 +477,4 @@ function renderGraficosRH() {
         } catch(e){}
     }
 }
+
