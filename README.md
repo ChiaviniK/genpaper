@@ -33,7 +33,7 @@ Como auditores externos (ou novos analistas de dados), a missão dos alunos é a
 
 1.  **Clone este repositório:**
     ```bash
-    git clone [https://github.com/SEU-USUARIO/genpaper.git](https://github.com/SEU-USUARIO/genpaper.git)
+    git clone https://github.com/ChiaviniK/genpaper.git
     ```
 2.  **Abra a pasta do projeto.**
 3.  **Inicie a aplicação:**
@@ -55,19 +55,6 @@ O sistema contém "bugs" e "falhas" intencionais nos dados para serem descoberto
 * **Problema:** A contabilidade aponta um gasto excessivo com Resina, mas o estoque físico está vazio.
 * **Dados Envolvidos:** Notas Fiscais (`contabilidade.json`) e Pesagem de Caminhões (`logistica.json`).
 * **Objetivo:** Cruzar o peso faturado na nota fiscal com o peso real aferido na balança da portaria para encontrar desvios de carga.
-
----
-
-## 🔐 Credenciais de Acesso (Spoilers)
-
-O sistema possui um mecanismo de **Controle de Acesso Baseado em Função (RBAC)** simulado. Os alunos devem começar descobrindo a falha de segurança no RH.
-
-| Perfil | Usuário | Senha | Acesso Principal |
-| :--- | :--- | :--- | :--- |
-| **RH (Ponto de Entrada)** | `rh.admin` | `rh123` | Acesso à tabela de senhas de todos os usuários. |
-| **Produção** | `prod.lead` | *(Descobrir)* | Dashboard de Máquinas e Turnos. |
-| **Auditoria** | `audit.ext` | *(Descobrir)* | Acesso exclusivo ao **Data Lake** para download dos JSONs. |
-| **Financeiro** | `fin.cfo` | *(Descobrir)* | Dados de pagamentos. |
 
 ---
 
