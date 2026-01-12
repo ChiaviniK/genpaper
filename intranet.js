@@ -130,11 +130,93 @@ const DB = {
         { nf: "NF-5004", forn: "Química Sul", item: "Resina", qtd: 8000, total: "R$ 40.000", status: "Faturado", dados: [{ k: "Data", v: "12/01/26" }] }  // Balança diz 5500
     ],
 
-    // --- MARKETING (Distratores + Análise ROI futura) ---
+   // --- MARKETING (DATASET EXPANDIDO: 65 REGISTROS PARA ANÁLISE TEMPORAL) ---
     mkt_campanhas: [
-        { nome: "Papel Verde", canal: "Instagram", status: "Jan", dados: [{ k: "Cliques", v: "15.000" }, { k: "Gasto", v: "R$ 5000" }] },
-        { nome: "Papel Verde", canal: "Instagram", status: "Fev", dados: [{ k: "Cliques", v: "13.800" }, { k: "Gasto", v: "R$ 5000" }] },
-        { nome: "Institucional", canal: "LinkedIn", status: "Mar", dados: [{ k: "Cliques", v: "620" }, { k: "Gasto", v: "R$ 2000" }] }
+        // --- JANEIRO 2025 (Volta às Aulas - Alta Demanda) ---
+        { id: 1, data: "2025-01-05", campanha: "Volta às Aulas", canal: "Instagram", gasto: 5000, cliques: 15200, conv: 300 },
+        { id: 2, data: "2025-01-07", campanha: "Institucional B2B", canal: "LinkedIn", gasto: 2000, cliques: 450, conv: 10 },
+        { id: 3, data: "2025-01-12", campanha: "Volta às Aulas", canal: "Instagram", gasto: 5200, cliques: 16100, conv: 320 },
+        { id: 4, data: "2025-01-15", campanha: "Papel A4 Report", canal: "Google Ads", gasto: 3000, cliques: 8000, conv: 500 },
+        { id: 5, data: "2025-01-20", campanha: "Volta às Aulas", canal: "Instagram", gasto: 4800, cliques: 14500, conv: 280 },
+        { id: 6, data: "2025-01-28", campanha: "Institucional B2B", canal: "LinkedIn", gasto: 2000, cliques: 500, conv: 12 },
+
+        // --- FEVEREIRO 2025 (Queda Pós-Sazonal) ---
+        { id: 7, data: "2025-02-05", campanha: "Ressaca Escolar", canal: "Instagram", gasto: 1500, cliques: 5000, conv: 80 },
+        { id: 8, data: "2025-02-10", campanha: "Papel Reciclado", canal: "YouTube", gasto: 8000, cliques: 20000, conv: 50 }, // Branding (Muito clique, pouca conversão)
+        { id: 9, data: "2025-02-15", campanha: "Institucional B2B", canal: "LinkedIn", gasto: 2000, cliques: 480, conv: 15 },
+        { id: 10, data: "2025-02-22", campanha: "Sustentabilidade", canal: "Blog", gasto: 500, cliques: 1200, conv: 5 },
+
+        // --- MARÇO 2025 (Campanha Fracassada - O "Buraco" no Gráfico) ---
+        { id: 11, data: "2025-03-05", campanha: "GenPaper ESG", canal: "LinkedIn", gasto: 5000, cliques: 620, conv: 2 }, // ROI Terrível
+        { id: 12, data: "2025-03-12", campanha: "GenPaper ESG", canal: "Instagram", gasto: 4500, cliques: 800, conv: 5 }, // Ninguém ligou
+        { id: 13, data: "2025-03-20", campanha: "Google Search", canal: "Google Ads", gasto: 3000, cliques: 3500, conv: 100 },
+        { id: 14, data: "2025-03-28", campanha: "Institucional", canal: "TV Local", gasto: 15000, cliques: 0, conv: 0 }, // Offline (sem clique)
+
+        // --- ABRIL 2025 (Recuperação) ---
+        { id: 15, data: "2025-04-05", campanha: "Dia da Terra", canal: "Instagram", gasto: 3000, cliques: 9000, conv: 150 },
+        { id: 16, data: "2025-04-10", campanha: "Dia da Terra", canal: "YouTube", gasto: 4000, cliques: 12000, conv: 40 },
+        { id: 17, data: "2025-04-18", campanha: "B2B Embalagens", canal: "LinkedIn", gasto: 2500, cliques: 900, conv: 40 },
+        { id: 18, data: "2025-04-25", campanha: "Google Search", canal: "Google Ads", gasto: 3000, cliques: 4000, conv: 110 },
+
+        // --- MAIO 2025 (Estabilidade) ---
+        { id: 19, data: "2025-05-02", campanha: "Mês da Indústria", canal: "LinkedIn", gasto: 3000, cliques: 1100, conv: 55 },
+        { id: 20, data: "2025-05-10", campanha: "Papel Toalha", canal: "Instagram", gasto: 2000, cliques: 6000, conv: 200 },
+        { id: 21, data: "2025-05-18", campanha: "Google Search", canal: "Google Ads", gasto: 3000, cliques: 4100, conv: 120 },
+        { id: 22, data: "2025-05-25", campanha: "Influencers", canal: "TikTok", gasto: 5000, cliques: 25000, conv: 80 },
+
+        // --- JUNHO 2025 (Campanha de Inverno) ---
+        { id: 23, data: "2025-06-05", campanha: "Inverno Aconchegante", canal: "Instagram", gasto: 2500, cliques: 7000, conv: 100 },
+        { id: 24, data: "2025-06-12", campanha: "Embalagem Delivery", canal: "Google Ads", gasto: 4000, cliques: 5000, conv: 300 },
+        { id: 25, data: "2025-06-20", campanha: "B2B Eventos", canal: "LinkedIn", gasto: 2000, cliques: 600, conv: 20 },
+        { id: 26, data: "2025-06-28", campanha: "Institucional", canal: "YouTube", gasto: 1000, cliques: 3000, conv: 10 },
+
+        // --- JULHO 2025 (Férias) ---
+        { id: 27, data: "2025-07-05", campanha: "Artesanato Férias", canal: "Pinterest", gasto: 1000, cliques: 8000, conv: 50 },
+        { id: 28, data: "2025-07-12", campanha: "Google Search", canal: "Google Ads", gasto: 3000, cliques: 3800, conv: 90 },
+        { id: 29, data: "2025-07-20", campanha: "Volta às Aulas 2", canal: "Instagram", gasto: 4000, cliques: 11000, conv: 200 },
+        { id: 30, data: "2025-07-28", campanha: "B2B Corporativo", canal: "LinkedIn", gasto: 2200, cliques: 550, conv: 18 },
+
+        // --- AGOSTO 2025 ---
+        { id: 31, data: "2025-08-05", campanha: "Dia dos Pais", canal: "Instagram", gasto: 3000, cliques: 8500, conv: 180 },
+        { id: 32, data: "2025-08-12", campanha: "Escritório Novo", canal: "Google Ads", gasto: 3500, cliques: 4200, conv: 150 },
+        { id: 33, data: "2025-08-20", campanha: "Sustentabilidade", canal: "YouTube", gasto: 2000, cliques: 6000, conv: 20 },
+        { id: 34, data: "2025-08-28", campanha: "B2B Indústria", canal: "LinkedIn", gasto: 2000, cliques: 580, conv: 25 },
+
+        // --- SETEMBRO 2025 (Primavera) ---
+        { id: 35, data: "2025-09-05", campanha: "Novos Cadernos", canal: "Instagram", gasto: 2800, cliques: 9000, conv: 210 },
+        { id: 36, data: "2025-09-12", campanha: "Google Search", canal: "Google Ads", gasto: 3000, cliques: 4000, conv: 115 },
+        { id: 37, data: "2025-09-20", campanha: "Semana do Cliente", canal: "E-mail Mkt", gasto: 500, cliques: 1500, conv: 300 }, // Custo baixo, conv alta
+        { id: 38, data: "2025-09-28", campanha: "Branding", canal: "YouTube", gasto: 3000, cliques: 10000, conv: 30 },
+
+        // --- OUTUBRO 2025 ---
+        { id: 39, data: "2025-10-05", campanha: "Dia das Crianças", canal: "Instagram", gasto: 4000, cliques: 12000, conv: 250 },
+        { id: 40, data: "2025-10-12", campanha: "Google Search", canal: "Google Ads", gasto: 3000, cliques: 4100, conv: 110 },
+        { id: 41, data: "2025-10-20", campanha: "Outubro Rosa", canal: "LinkedIn", gasto: 1000, cliques: 3000, conv: 10 },
+        { id: 42, data: "2025-10-28", campanha: "Pré-Black Friday", canal: "Instagram", gasto: 2000, cliques: 6000, conv: 50 },
+
+        // --- NOVEMBRO 2025 (Black Friday - O PICO DO ANO) ---
+        { id: 43, data: "2025-11-01", campanha: "Esquenta Black", canal: "Instagram", gasto: 5000, cliques: 15000, conv: 300 },
+        { id: 44, data: "2025-11-10", campanha: "Ofertas B2B", canal: "LinkedIn", gasto: 8000, cliques: 2500, conv: 100 },
+        { id: 45, data: "2025-11-20", campanha: "Black Friday Week", canal: "Google Ads", gasto: 12000, cliques: 35000, conv: 1200 }, // Pico Máximo
+        { id: 46, data: "2025-11-25", campanha: "Black Friday Social", canal: "TikTok", gasto: 6000, cliques: 40000, conv: 200 },
+        { id: 47, data: "2025-11-28", campanha: "Black Friday Final", canal: "Instagram", gasto: 10000, cliques: 28000, conv: 900 },
+
+        // --- DEZEMBRO 2025 (Natal) ---
+        { id: 48, data: "2025-12-05", campanha: "Embalagens Natal", canal: "Google Ads", gasto: 5000, cliques: 10000, conv: 400 },
+        { id: 49, data: "2025-12-10", campanha: "Presentes", canal: "Instagram", gasto: 4500, cliques: 13000, conv: 350 },
+        { id: 50, data: "2025-12-20", campanha: "Boas Festas Corp", canal: "LinkedIn", gasto: 1000, cliques: 1500, conv: 5 },
+        { id: 51, data: "2025-12-28", campanha: "Saldão de Ano Novo", canal: "Instagram", gasto: 2000, cliques: 7000, conv: 150 },
+
+        // --- JANEIRO 2026 (Dados Atuais / Recentes) ---
+        { id: 52, data: "2026-01-02", campanha: "Volta às Aulas '26", canal: "Instagram", gasto: 6000, cliques: 16000, conv: 310 },
+        { id: 53, data: "2026-01-05", campanha: "Google Search", canal: "Google Ads", gasto: 3500, cliques: 4500, conv: 130 },
+        { id: 54, data: "2026-01-08", campanha: "Institucional 2026", canal: "LinkedIn", gasto: 2500, cliques: 700, conv: 20 },
+        { id: 55, data: "2026-01-10", campanha: "Viral Papel", canal: "TikTok", gasto: 1000, cliques: 15000, conv: 40 },
+        { id: 56, data: "2026-01-11", campanha: "Retargeting", canal: "Facebook", gasto: 2000, cliques: 5000, conv: 100 },
+        { id: 57, data: "2026-01-12", campanha: "Promoção Relâmpago", canal: "E-mail", gasto: 200, cliques: 800, conv: 80 },
+        { id: 58, data: "2026-01-13", campanha: "Parceria Influencer", canal: "Instagram", gasto: 5000, cliques: 12500, conv: 180 },
+        { id: 59, data: "2026-01-14", campanha: "Busca Local", canal: "Google Maps", gasto: 500, cliques: 300, conv: 50 },
+        { id: 60, data: "2026-01-15", campanha: "Teste A/B", canal: "Instagram", gasto: 1000, cliques: 2000, conv: 40 }
     ],
     mkt_social: [
         { rede: "Twitter", mencao: "@GenPaper cheiro estranho", status: "Negativo", dados: [{ k: "Data", v: "10/01" }, { k: "Retweets", v: "12" }] },
@@ -408,3 +490,4 @@ function renderGraficosRH() {
         } catch (e) { }
     }
 }
+
